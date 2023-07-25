@@ -1,0 +1,18 @@
+button {
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: #242424;
+
+  border: 1px solid #242424;
+  border-radius: 8px;
+  padding: 0.6em 1.2em;
+  background-color: rgba(255, 255, 255, 0.87);
+
+  transition: border-color 0.25s;
+}
+button:hover,
+button:focus,
+button:focus-visible {
+  box-shadow: 0px 3.4px 3.4px 0px #242424;
+}
