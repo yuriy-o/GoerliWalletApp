@@ -18,14 +18,18 @@
 
 .label-description {
   text-align: left;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
 
   margin-bottom: 10px;
+
+  @media screen and (min-width: 480px) {
+    font-size: 20px;
+  }
 }
 
 .input {
-  width: 400px;
+  max-width: 400px;
 
   font-size: 1em;
   font-weight: 500;
@@ -37,7 +41,9 @@
   padding: 0.6em 1.2em;
   background-color: rgba(255, 255, 255, 0.87);
 
-  /* margin-bottom: 30px; */
+  @media screen and (min-width: 480px) {
+    font-size: 20px;
+  }
 }
 
 .input::placeholder {
