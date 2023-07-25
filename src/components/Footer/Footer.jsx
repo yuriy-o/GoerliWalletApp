@@ -3,7 +3,7 @@ import './Footer.css';
 const Footer = () => {
   return (
     <footer className="footer">
-      <span>
+      <span className="span">
         Project by{' '}
         <a
           href="https://github.com/yuriy-o"
