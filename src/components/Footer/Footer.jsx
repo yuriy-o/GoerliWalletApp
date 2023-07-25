@@ -6,7 +6,7 @@ const Footer = () => {
       <span className="span">
         Project by{' '}
         <a
-          href="https://github.com/yuriy-o"
+          href="https://github.com/yuriy-o/GoerliWalletApp"
           className="link"
           target="_blank"
           rel="noopener noreferrer"
