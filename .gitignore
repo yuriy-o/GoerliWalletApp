@@ -23,4 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
+
+# my additions
 *copy*.jsx
+help.js
+web3Utils.js
