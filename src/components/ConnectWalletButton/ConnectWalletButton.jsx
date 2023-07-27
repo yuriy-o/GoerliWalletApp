@@ -23,9 +23,9 @@ const ConnectWalletButton = () => {
       });
 
       setWalletAddress(account);
-      console.log('Підключено гаманець з адресою:', account);
+      console.log('Connected wallet with address:', account);
     } catch (error) {
-      console.error('Помилка підключення гаманця:', error);
+      console.error('Wallet connection error:', error);
     } finally {
       setConnecting(false);
     }
