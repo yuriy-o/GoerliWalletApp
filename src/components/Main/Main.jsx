@@ -29,7 +29,7 @@ const Main = () => {
       isNaN(tokensAmount) ||
       tokensAmount < 0.000001 ||
       tokensAmount > 100000 ||
-      tokensAmount % 10 !== 0
+      (tokensAmount * 1000000) % 10 !== 0
     ) {
       toast.error('Invalid number of tokens', {
         closeButton: true,
