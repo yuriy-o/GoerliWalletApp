@@ -1,28 +1,80 @@
+import { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './Main.css';
 
 const Main = () => {
+  const [walletAddress, setWalletAddress] = useState('');
+  const [numberOfTokens, setNumberOfTokens] = useState('');
+
+  const isValidWalletAddress = address => {
+    const regex = /^0x[0-9a-fA-F]{40}$/;
+    return regex.test(address);
+  };
+
+  const handleFormSubmit = e => {
+    e.preventDefault();
+
+    if (!isValidWalletAddress(walletAddress)) {
+      toast.error('Введено неправильний формат адреси гаманця', {
+        closeButton: true,
+      });
+      return;
+    }
+
+    const tokensAmount = parseFloat(numberOfTokens.replace(',', '.'));
+
+    if (
+      isNaN(tokensAmount) ||
+      tokensAmount < 0.000001 ||
+      tokensAmount > 100000 ||
+      tokensAmount % 10 !== 0
+    ) {
+      toast.error('Введено неправильну кількість токенів', {
+        closeButton: true,
+      });
+      return;
+    }
+
+    // Логіка для здійснення трансферу...
+    console.log(`Передано ${tokensAmount} токенів з адреси ${walletAddress}`);
+    toast.success(`Трансфер ${tokensAmount} токенів виконано успішно`, {
+      closeButton: true,
+    });
+  };
+
   return (
     <main className="main">
       <h1 className="pageTitle">My Goerli Wallet App</h1>
-      <form className="form">
+      <form className="form" onSubmit={handleFormSubmit}>
         <label className="label">
           <p className="label-description">Input for wallet address:</p>
           <input
             className="input"
             type="text"
             placeholder="Enter Your Wallet Address (0x...)"
-            // placeholder="Enter Your Wallet Address (0x...) or ETH Mainnet ENS Domain"
-            // placeholder="0x7ff7D4b2f9538613E68ddeAAb823DF55CEB88c42"
+            value={walletAddress}
+            onChange={e => setWalletAddress(e.target.value)}
             required
           />
         </label>
 
         <label className="label">
           <p className="label-description">Number of tokens:</p>
-          <input className="input" type="number" placeholder="0.00" required />
+          <input
+            className="input"
+            type="number"
+            placeholder="0.000001"
+            step="0.000001"
+            value={numberOfTokens}
+            onChange={e => setNumberOfTokens(e.target.value)}
+            required
+          />
         </label>
         <button type="submit">Perform the transfer</button>
       </form>
+      <ToastContainer />
     </main>
   );
 };
