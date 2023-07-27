@@ -1,56 +1,73 @@
-import { ethers } from 'ethers';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
 
 import './ConnectWalletButton.css';
 
 const ConnectWalletButton = () => {
-  // Функція для підключення гаманця
+  const [walletAddress, setWalletAddress] = useState();
+  const [metaMaskInstalled, setMetaMaskInstalled] = useState(
+    typeof window.ethereum !== 'undefined'
+  );
+  const [connecting, setConnecting] = useState(false);
+
   const connectWallet = async () => {
-    // Перевірка чи встановлено MetaMask
-    if (!window.ethereum) {
-      // Виведення повідомлення з посиланням на MetaMask
-      toast.error(
-        <>
-          Встановіть{' '}
-          <a
-            href="https://metamask.io/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            MetaMask
-          </a>{' '}
-          у вашому браузері
-        </>,
-        {
-          closeButton: true, // Додає кнопку "закрити"
-        }
-      );
+    if (!metaMaskInstalled) {
+      // Виводимо повідомлення про встановлення MetaMask
+      setMetaMaskInstalled(false);
       return;
     }
 
     try {
-      // Підключення гаманця
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const address = await signer.getAddress();
-      console.log('Підключено гаманець з адресою:', address);
+      setConnecting(true);
+      const [account] = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      });
+
+      setWalletAddress(account);
+      console.log('Підключено гаманець з адресою:', account);
     } catch (error) {
       console.error('Помилка підключення гаманця:', error);
-      // Виведення повідомлення про помилку з кнопкою "закрити"
-      toast.error('Помилка підключення гаманця', {
-        closeButton: true,
-      });
+    } finally {
+      setConnecting(false);
     }
   };
 
+  const installMetaMask = () => {
+    window.open('https://metamask.io/', '_blank');
+  };
+
+  if (walletAddress) {
+    const shortAddress = `${walletAddress.slice(0, 6)}...${walletAddress.slice(
+      -4
+    )}`;
+    return (
+      <div>
+        <button className="button" onClick={connectWallet}>
+          {shortAddress}
+        </button>
+      </div>
+    );
+  }
+
+  if (metaMaskInstalled) {
+    return (
+      <div>
+        <button
+          className="button"
+          onClick={connectWallet}
+          disabled={connecting}
+        >
+          {connecting ? 'Connecting...' : 'Connect wallet'}
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <button className="button" onClick={connectWallet}>
-        Connect wallet
+      <button className="button" onClick={installMetaMask}>
+        Install MetaMask
       </button>
-      <ToastContainer /> {/* Контейнер для виведення повідомлень */}
+      <p className="comment">Install MetaMask in your browser</p>
     </div>
   );
 };
