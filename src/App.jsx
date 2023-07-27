@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { PacmanLoader } from 'react-spinners';
 
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
+import Loader from './components/Loader/Loader';
 
 import './App.css';
 
@@ -21,9 +21,7 @@ const App = () => {
   return (
     <>
       {isLoading ? (
-        <div className="loader">
-          <PacmanLoader color="#1f1f1f" size={40} />
-        </div>
+        <Loader />
       ) : (
         <>
           <Header />

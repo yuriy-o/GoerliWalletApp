@@ -16,10 +16,3 @@
     padding-right: 2rem;
   }
 }
-
-.loader {
-  display: 'flex';
-  justify-content: 'center';
-  align-items: 'center';
-  height: '100vh';
-}
