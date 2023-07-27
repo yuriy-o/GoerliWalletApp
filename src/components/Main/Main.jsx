@@ -17,7 +17,7 @@ const Main = () => {
     e.preventDefault();
 
     if (!isValidWalletAddress(walletAddress)) {
-      toast.error('Введено неправильний формат адреси гаманця', {
+      toast.error('Invalid wallet address format', {
         closeButton: true,
       });
       return;
@@ -31,15 +31,17 @@ const Main = () => {
       tokensAmount > 100000 ||
       tokensAmount % 10 !== 0
     ) {
-      toast.error('Введено неправильну кількість токенів', {
+      toast.error('Invalid number of tokens', {
         closeButton: true,
       });
       return;
     }
 
-    // Логіка для здійснення трансферу...
-    console.log(`Передано ${tokensAmount} токенів з адреси ${walletAddress}`);
-    toast.success(`Трансфер ${tokensAmount} токенів виконано успішно`, {
+    // Logic for performing the transfer...
+    console.log(
+      `Transferred ${tokensAmount} tokens from address ${walletAddress}`
+    );
+    toast.success(`Transfer of ${tokensAmount} tokens successful`, {
       closeButton: true,
     });
   };
@@ -49,7 +51,7 @@ const Main = () => {
       <h1 className="pageTitle">My Goerli Wallet App</h1>
       <form className="form" onSubmit={handleFormSubmit}>
         <label className="label">
-          <p className="label-description">Input for wallet address:</p>
+          <p className="label-description">Wallet address:</p>
           <input
             className="input"
             type="text"

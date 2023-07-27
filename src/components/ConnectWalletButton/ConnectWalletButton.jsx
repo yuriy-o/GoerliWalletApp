@@ -11,7 +11,6 @@ const ConnectWalletButton = () => {
 
   const connectWallet = async () => {
     if (!metaMaskInstalled) {
-      // Виводимо повідомлення про встановлення MetaMask
       setMetaMaskInstalled(false);
       return;
     }

@@ -1,8 +1,8 @@
 #root {
   min-height: calc(100vh - 60px);
   margin: 0 auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 16px;
+  padding-right: 16px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
   #root {
     width: 1280px;
     min-height: 100vh;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
